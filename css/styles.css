@@ -10,6 +10,8 @@
 
 
 /* ---- Base Rules ---- */
+
+
 body {
     background: rgb(136,203,171);
     background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
@@ -75,7 +77,7 @@ section {
     cursor: pointer;
 }
 
-.navbar__menu .menu__link {
+.navbar__menu .menu-link {
     display: block;
     padding: 1em;
     font-weight: bold;
@@ -83,8 +85,8 @@ section {
     color: #000;
 }
 
-.navbar__menu .menu__link:hover {
-    background: #cc1;
+.navbar__menu .menu-link:hover {
+    background: #abc;
     color: #fff;
     transition: ease 0.3s all;
 }
