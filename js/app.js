@@ -27,12 +27,18 @@ const allSections = document.getElementsByTagName('section'); // num of section 
  * 
 */
 
+let navbar_position = section => {
+    return Math.floor(section.getBoundingClientRect().top);
+}
+
+
 // build the nav
 const create_navMenu = () =>{
 
     for(let sec of allSections){
         const listele = document.createElement('li');  
-        listele.innerHTML = `<a class='menu-link' href='#${sec.getAttribute('id')}'>
+        listele.innerHTML = `<a class='menu-link' 
+        href='#${sec.getAttribute('id')}'>
         ${sec.getAttribute('class')}</a>`;
        // put link in list item
         fragment.appendChild(listele);
@@ -64,28 +70,30 @@ const create_navMenu = () =>{
         queylistitem.childNodes[secId].setAttribute('style', 'background-color: none;');   
 }
 
-const navbar_position = section => {
-    return section.getBoundingClientRect().top;
-}
-  
+
 
 /**
  * End Main Functions 
 */
-
  // Scroll to section on link click
- this.addEventListener('scroll', set_secNavbar = () =>{
-    let ele = 0;
-    for (let index in allSections) {
+
+ let scrolling = () => {
+    
+    navList.addEventListener('scroll', set_secNavbar = () =>{
+    
+        let ele = 0; let top = 250; let bottom = -250;
+        for (let index in allSections) {
          ele = navbar_position(allSections[index]);
-         display = () => ele < 250 && ele >= -250;
+         display = () =>  ele < top && ele >= bottom;
 
          remove_active_Class(allSections[index]);
          add_active_Class(display(), allSections[index]);
     }
  }
 );
+}
 
+scrolling();
 
 // Build(call) menu 
   
