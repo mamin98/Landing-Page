@@ -27,7 +27,7 @@ const allSections = document.getElementsByTagName('section'); // num of section 
  * 
 */
 
-let navbar_position = section => {
+ const navbar_position = section => {
     return Math.floor(section.getBoundingClientRect().top);
 }
 
@@ -39,7 +39,7 @@ const create_navMenu = () =>{
         const listele = document.createElement('li');  
         listele.innerHTML = `<a class='menu-link' 
         href='#${sec.getAttribute('id')}'>
-        ${sec.getAttribute('class')}</a>`;
+        ${sec.getAttribute('data-nav')}</a>`;
        // put link in list item
         fragment.appendChild(listele);
     }
@@ -50,7 +50,7 @@ const create_navMenu = () =>{
  const queylistitem = document.querySelector('#navbar-List');
 
 // Add class 'active'
- const add_active_Class = (cond, sec) => {
+ const addactive_Class = (cond, sec) => {
     if(cond){
         sec.classList.toggle('your-active-class');
         
@@ -62,7 +62,7 @@ const create_navMenu = () =>{
 }
 
 // Remove class 'active'
- const remove_active_Class = sec => {
+ const removeactive_Class = sec => {
     sec.classList.toggle('your-active-class');
     sec.setAttribute('style',
         'box-shadow: none; border:none; border-radius:none;');
@@ -75,26 +75,22 @@ const create_navMenu = () =>{
 /**
  * End Main Functions 
 */
+
  // Scroll to section on link click
-
- let scrolling = () => {
+    this.addEventListener('scroll', set_secNavbar = () =>{
+        const top = 250; let bottom = -250; 
+        for (let index = 0; index < allSections.length; index++) {
+            
+            const ele = navbar_position(allSections[index]);
+            display = () => ele < top && ele >= bottom;
     
-    navList.addEventListener('scroll', set_secNavbar = () =>{
-    
-        let ele = 0; let top = 250; let bottom = -250;
-        for (let index in allSections) {
-         ele = navbar_position(allSections[index]);
-         display = () =>  ele < top && ele >= bottom;
-
-         remove_active_Class(allSections[index]);
-         add_active_Class(display(), allSections[index]);
-    }
+            removeactive_Class(allSections[index]);
+            addactive_Class(display(), allSections[index]);
+        }
  }
 );
-}
 
-scrolling();
-
+ 
 // Build(call) menu 
   
 create_navMenu();
