@@ -38,7 +38,7 @@ const create_navMenu = () =>{
     for(let sec of allSections){
         const listele = document.createElement('li');  
         listele.innerHTML = `<a class='menu-link' 
-        href='#${sec.getAttribute('id')}'>
+        sec-id='${sec.getAttribute('id')}'>
         ${sec.getAttribute('data-nav')}</a>`;
        // put link in list item
         fragment.appendChild(listele);
@@ -52,7 +52,7 @@ const create_navMenu = () =>{
 // Add class 'active'
  const addactive_Class = (cond, sec) => {
     if(cond){
-        sec.classList.toggle('your-active-class');
+        sec.classList.add('your-active-class');
         
         sec.setAttribute('style', 
         'box-shadow: 20px 20px 50px 15px #0f3057; border:1px solid green; border-radius:1px');
@@ -63,7 +63,7 @@ const create_navMenu = () =>{
 
 // Remove class 'active'
  const removeactive_Class = sec => {
-    sec.classList.toggle('your-active-class');
+    sec.classList.remove('your-active-class');
     sec.setAttribute('style',
         'box-shadow: none; border:none; border-radius:none;');
         const secId = sec.id.slice(7.8) -1;
@@ -77,7 +77,22 @@ const create_navMenu = () =>{
 */
 
  // Scroll to section on link click
-    this.addEventListener('scroll', set_secNavbar = () =>{
+ 
+ this.addEventListener('click', scrolling = e => {
+    let val = e.target;
+    if(val.nodeName){
+        document.getElementById(val.getAttribute('sec-id')).scrollIntoView({
+            top: 50,
+            left: 5,
+            behavior: "auto",
+            bottom: 0
+        });
+    
+    }
+});
+
+
+ queylistitem.addEventListener('scroll', set_secNavbar = () =>{
         const top = 250; let bottom = -250; 
         for (let index = 0; index < allSections.length; index++) {
             
@@ -90,8 +105,9 @@ const create_navMenu = () =>{
  }
 );
 
- 
+
 // Build(call) menu 
   
 create_navMenu();
 
+ 
