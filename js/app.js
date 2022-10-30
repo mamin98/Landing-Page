@@ -27,11 +27,6 @@ const allSections = document.getElementsByTagName('section'); // num of section 
  * 
 */
 
- const navbar_position = section => {
-    return Math.floor(section.getBoundingClientRect().top);
-}
-
-
 // build the nav
 const create_navMenu = () =>{
 
@@ -44,13 +39,14 @@ const create_navMenu = () =>{
         fragment.appendChild(listele);
     }
     navList.appendChild(fragment);
+
 }
 
  
  const queylistitem = document.querySelector('#navbar-List');
 
 // Add class 'active'
- const addactive_Class = (cond, sec) => {
+ const addActiveClass = (cond, sec) => {
     if(cond){
         sec.classList.add('your-active-class');
         
@@ -62,7 +58,7 @@ const create_navMenu = () =>{
 }
 
 // Remove class 'active'
- const removeactive_Class = sec => {
+ const removeActiveClass = sec => {
     sec.classList.remove('your-active-class');
     sec.setAttribute('style',
         'box-shadow: none; border:none; border-radius:none;');
@@ -70,38 +66,35 @@ const create_navMenu = () =>{
         queylistitem.childNodes[secId].setAttribute('style', 'background-color: none;');   
 }
 
-
+const navbar_position = section => {
+    return Math.floor(section.getBoundingClientRect().top);
+}
+  
 
 /**
  * End Main Functions 
 */
 
  // Scroll to section on link click
- 
- this.addEventListener('click', scrolling = e => {
-    let val = e.target;
-    if(val.nodeName){
-        document.getElementById(val.getAttribute('sec-id')).scrollIntoView({
-            top: 50,
-            left: 5,
-            behavior: "auto",
-            bottom: 0
-        });
+
+ queylistitem.addEventListener('click', scrolling = e => {
+    if(e.target.nodeName){
+        document.getElementById(e.target.getAttribute('sec-id'))
+        .scrollIntoView({behavior: 'smooth'});
     
     }
 });
 
+ this.addEventListener('scroll', set_secNavbar = () =>{
+    let ele = 0; let top = 250; let bottom = -250;
 
- queylistitem.addEventListener('scroll', set_secNavbar = () =>{
-        const top = 250; let bottom = -250; 
-        for (let index = 0; index < allSections.length; index++) {
-            
-            const ele = navbar_position(allSections[index]);
-            display = () => ele < top && ele >= bottom;
-    
-            removeactive_Class(allSections[index]);
-            addactive_Class(display(), allSections[index]);
-        }
+    for (let index=0; index < allSections.length; index++) {
+         ele = navbar_position(allSections[index]);
+         display = () => ele < top && ele >= bottom;
+
+         removeActiveClass(allSections[index]);
+         addActiveClass(display(), allSections[index]);
+    }
  }
 );
 
@@ -110,4 +103,3 @@ const create_navMenu = () =>{
   
 create_navMenu();
 
- 
