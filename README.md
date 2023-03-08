@@ -9,5 +9,7 @@
 ## Main Features :
 
 ** Create the Navigation bar dynamically.
+
 ** Scroll to any section by clicking on the corresponding element in the Navbar.
+
 \*\* By scrolling, the section in the viewport get detected and stylized.
